@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import validaciones.ValidarExpresion1;
 import validaciones.ValidarExpresion2;
 import validaciones.ValidarExpresion3;
+import validaciones.ValidarExpresion4;
 
 //Clase funcional con la base de datos, solo falta renombrar variables
 public class VentanaPrincipal extends JFrame {
@@ -122,8 +123,8 @@ public class VentanaPrincipal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String cadena = text1.getText();
-				cadena = cadena.toUpperCase();
-				ValidarExpresion1 validar = new ValidarExpresion1();
+				cadena = cadena.toLowerCase();
+				ValidarExpresion4 validar = new ValidarExpresion4();
 				array = validar.validarExpresion(text1.getText());
 				DefaultTableModel model = new DefaultTableModel(array, new String[array[0].length]);
 				table.setModel(model);
