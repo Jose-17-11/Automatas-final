@@ -1,13 +1,19 @@
 package implementacionesTests;
 
 public enum Tokens {
-	Reservadas,
-	Igual,
+	Saludo,
+	Despedida,
+	Cuidado,
+	DespedidaLuego,
+	Pregunta,
+	Telefono,
+	CP,
+	Email,
+	URL,
+	IP,
 	Suma,
 	Resta,
 	Multiplicacion,
 	Division,
-	Identificador,
-	Numero,
 	ERROR
 }

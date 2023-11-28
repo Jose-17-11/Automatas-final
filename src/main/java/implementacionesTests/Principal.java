@@ -4,7 +4,7 @@ import java.io.File;
 
 public class Principal {
 	public static void main(String[] args) {
-		String ruta = "C:\\Users\\Jose Manuel\\eclipse-workspace\\proyectoFinal\\src\\main\\java\\implementacionesTests\\Lexer.flex";
+		String ruta = "/home/jose-manuel/eclipse-workspace/Automatas-final/src/main/java/implementacionesTests/Lexer.flex";
 		generarLexer(ruta);
 	}
 	

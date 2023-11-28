@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -17,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
+import implementacionesTests.Evaluar;
 import validaciones.ValidarExpresion1;
 import validaciones.ValidarExpresion2;
 import validaciones.ValidarExpresion3;
@@ -28,7 +30,7 @@ public class VentanaPrincipal extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JLabel titulo, n1, n2, denegado, letraDenegada;
+	JLabel titulo, n1, n2, denegado, letraDenegada, lexicoR;
 	JTextField text1, text2;
 	JButton registrarEntrada1, registrarEntrada2, registrarEntrada3;
 	String[][] array = new String[7][7];
@@ -85,6 +87,11 @@ public class VentanaPrincipal extends JFrame {
 		letraDenegada = new JLabel();
 		letraDenegada.setBounds(500, 260, 400, 50);
 		letraDenegada.setForeground(Color.WHITE);
+		
+		lexicoR = new JLabel();
+		lexicoR.setBounds(800, 200, 220, 30);
+		lexicoR.setForeground(Color.WHITE);
+
 
 		/************************
 		 * Creacion de la tabla *
@@ -109,6 +116,7 @@ public class VentanaPrincipal extends JFrame {
 		panel.add(titulo);
 		panel.add(denegado);
 		panel.add(letraDenegada);
+		panel.add(lexicoR);
 		panel.add(table);
 		panel.add(scrollPane);
 //		Color de fondo del panel
@@ -165,21 +173,37 @@ public class VentanaPrincipal extends JFrame {
 		registrarEntrada3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				/*	Recorrido del automata*/
 				String cadena = text1.getText();
-				cadena = cadena.toUpperCase();
+//				cadena = cadena.toUpperCase();
 				ValidarExpresion3 validar = new ValidarExpresion3();
 				array = validar.validarExpresion(text1.getText());
 				DefaultTableModel model = new DefaultTableModel(array, new String[array[0].length]);
 				table.setModel(model);
-				if (validar.estado == 'C') {
-					denegado.setText("Cadena aceptada");
-					letraDenegada.setText("");
-				} else if (!validar.condicion) {
-					denegado.setText("Cadena no aceptada");
-					letraDenegada.setText("Letras " + validar.denegada + " fuera del conjunto finito de entradas.");
-				} else {
-					denegado.setText("Cadena no aceptada");
-					letraDenegada.setText("");
+//				if (validar.estado == 'C') {
+//					denegado.setText("Cadena aceptada");
+//					letraDenegada.setText("");
+//				} else if (!validar.condicion) {
+//					denegado.setText("Cadena no aceptada");
+//					letraDenegada.setText("Letras " + validar.denegada + " fuera del conjunto finito de entradas.");
+//				} else {
+//					denegado.setText("Cadena no aceptada");
+//					letraDenegada.setText("");
+//				}
+				/*	Analizador Lexico*/
+				Evaluar evaluar = new Evaluar();
+				try {
+					boolean ev = evaluar.lexico(cadena);
+					if(ev) {
+						System.out.println(ev);
+						lexicoR.setText("El lexico es correcto");
+					}else {
+						lexicoR.setText("El lexico no es correcto");
+						System.out.println(ev);
+					}
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 		});
