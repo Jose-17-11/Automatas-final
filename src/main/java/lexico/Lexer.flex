@@ -1,5 +1,5 @@
-package implementacionesTests;
-import static implementacionesTests.*;
+package lexer;
+import static lexico.*;
 %%
 %class Lexer
 %type Tokens

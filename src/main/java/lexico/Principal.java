@@ -1,4 +1,4 @@
-package implementacionesTests;
+package lexico;
 
 import java.io.File;
 

@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
-import implementacionesTests.Evaluar;
+import lexico.Evaluar;
 import validaciones.ValidarExpresion1;
 import validaciones.ValidarExpresion2;
 import validaciones.ValidarExpresion3;

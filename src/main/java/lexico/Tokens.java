@@ -1,4 +1,4 @@
-package implementacionesTests;
+package lexico;
 
 public enum Tokens {
 	Saludo,
