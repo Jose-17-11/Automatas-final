@@ -4,28 +4,25 @@ import java.util.Scanner;
 
 public class Sintactico {
 
-    public static void main(String[] args) {
+    public String sintactico(String cadena) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Ingrese una cadena:");
-        String cadena = scanner.nextLine();
-
-        verificarCadena(cadena);
+        return verificarCadena(cadena);
     }
 
-    private static void verificarCadena(String cadena) {
+    private static String verificarCadena(String cadena) {
         String palabraSimilar = encontrarPalabraSimilar(cadena);
 
         if (palabraSimilar != null) {
             if (cadena.equalsIgnoreCase(palabraSimilar)) {
-                System.out.println("La cadena ingresada es igual a '" + palabraSimilar + "'.");
+                return "La cadena ingresada es igual a '" + palabraSimilar + "'.";
             } else {
                 String diferencia = obtenerDiferencia(palabraSimilar, cadena);
                 System.out.println("La cadena ingresada es similar a '" + palabraSimilar + "'.");
-                System.out.println("Caracteres que faltan para que sea igual: " + diferencia);
+                return "Caracteres que faltan para que sea igual: " + diferencia;
             }
         } else {
-            System.out.println("La cadena no coincide con ninguna palabra conocida.");
+            return "La cadena no coincide con ninguna palabra conocida.";
         }
     }
 

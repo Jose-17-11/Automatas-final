@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -19,6 +20,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import lexico.Evaluar;
+import testeos.Sintactico;
 import validaciones.ValidarExpresion1;
 import validaciones.ValidarExpresion2;
 import validaciones.ValidarExpresion3;
@@ -30,27 +32,20 @@ public class VentanaPrincipal extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JLabel titulo, n1, n2, denegado, letraDenegada, lexicoR;
+	JLabel titulo, n1, n2, denegado, letraDenegada, lexicoR, sintacticoR;
 	JTextField text1, text2;
-	JButton registrarEntrada1, registrarEntrada2, registrarEntrada3;
+	JButton registrarEntrada;
 	String[][] array = new String[7][7];
 
 	public VentanaPrincipal() {
 		setTitle("Automatas");
 		setResizable(false);
-		/**********************************
-		 * Panel Izquierdo y su contenido *
-		 **********************************/
-		JPanel panelIzquierda = new JPanel();
-		panelIzquierda.setBounds(0, 0, 240, 800);
-		panelIzquierda.setBackground(new Color(0, 56, 205));
-		panelIzquierda.setLayout(null);
-
-		getContentPane().add(panelIzquierda);
-		/***********************************
-		 * Asignar valores vacios al array *
-		 ***********************************/
-
+		
+		JLabel imagenLabel = new JLabel();
+		ImageIcon imagenIcon = new ImageIcon("/home/jose-manuel/eclipse-workspace/Automatas-final/src/main/java/IMAGES/b.png");
+		imagenLabel.setIcon(imagenIcon);
+		imagenLabel.setBounds(750, 50, 344, 147);
+		
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 6; j++) {
 				array[i][j] = "";
@@ -61,27 +56,22 @@ public class VentanaPrincipal extends JFrame {
 		 * Contenido del panel principal *
 		 *********************************/
 		titulo = new JLabel("Bienvenido");
-		titulo.setBounds(570, 0, 400, 100);
+		titulo.setBounds(180, 0, 400, 100);
 		titulo.setFont(new Font("Courier New", Font.BOLD, 16));
 		titulo.setForeground(Color.WHITE);
 
 		n1 = new JLabel("Ingrese la cadena de texto");
-		n1.setBounds(530, 85, 200, 100);
+		n1.setBounds(150, 75, 200, 100);
 		n1.setForeground(Color.WHITE);
 		text1 = new JTextField(10);
-		text1.setBounds(520, 200, 220, 30);
+		text1.setBounds(50, 150, 400, 50);
+		text1.setBackground(Color.LIGHT_GRAY);
 
-		registrarEntrada1 = new JButton("(6|7)*bc(a|bc)");
-		registrarEntrada1.setBounds(400, 300, 170, 30);
-
-		registrarEntrada2 = new JButton("bc*d|h|ae");
-		registrarEntrada2.setBounds(600, 300, 170, 30);
-
-		registrarEntrada3 = new JButton("bc*d|h|ae");
-		registrarEntrada3.setBounds(800, 300, 170, 30);
+		registrarEntrada = new JButton("Calcular");
+		registrarEntrada.setBounds(50, 200, 170, 30);
 
 		denegado = new JLabel();
-		denegado.setBounds(570, 220, 400, 50);
+		denegado.setBounds(475, 150, 400, 50);
 		denegado.setForeground(Color.WHITE);
 
 		letraDenegada = new JLabel();
@@ -89,16 +79,19 @@ public class VentanaPrincipal extends JFrame {
 		letraDenegada.setForeground(Color.WHITE);
 		
 		lexicoR = new JLabel();
-		lexicoR.setBounds(800, 200, 220, 30);
+		lexicoR.setBounds(50, 300, 220, 30);
 		lexicoR.setForeground(Color.WHITE);
 
+		sintacticoR = new JLabel();
+		sintacticoR.setBounds(400, 300, 420, 30);
+		sintacticoR.setForeground(Color.WHITE);
 
 		/************************
 		 * Creacion de la tabla *
 		 ************************/
 		DefaultTableModel model = new DefaultTableModel(array, new String[array[0].length]);
 		JTable table = new JTable(model);
-		table.setBounds(330, 350, 700, 110);
+		table.setBounds(50, 400, 700, 110);
 		JScrollPane scrollPane = new JScrollPane(table);
 
 		/********************************
@@ -108,91 +101,67 @@ public class VentanaPrincipal extends JFrame {
 		LineBorder borde = new LineBorder(Color.BLACK, 1);
 		((JComponent) panel).setBorder(borde);
 		panel.setLayout(null);
-		panel.add(registrarEntrada1);
-		panel.add(registrarEntrada2);
-		panel.add(registrarEntrada3);
+		panel.add(imagenLabel);
+		panel.add(registrarEntrada);
 		panel.add(n1);
 		panel.add(text1);
 		panel.add(titulo);
 		panel.add(denegado);
 		panel.add(letraDenegada);
 		panel.add(lexicoR);
+		panel.add(sintacticoR);
 		panel.add(table);
 		panel.add(scrollPane);
 //		Color de fondo del panel
-		panel.setBackground(new Color(45, 45, 45));
+		panel.setBackground(new Color(0, 0, 0));
 
 		/*************************************************************************
 		 * Conjunto de eventos que ocurren al precionar cualquier boton del menu *
 		 *************************************************************************/
-
-		/******* Realizar recorrido de automatas ingresados ***************/
-		registrarEntrada1.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String cadena = text1.getText();
-				cadena = cadena.toLowerCase();
-				ValidarExpresion4 validar = new ValidarExpresion4();
-				array = validar.validarExpresion(text1.getText());
-				DefaultTableModel model = new DefaultTableModel(array, new String[array[0].length]);
-				table.setModel(model);
-				if (validar.estado == 'D') {
-					denegado.setText("Cadena aceptada");
-					letraDenegada.setText("");
-				} else if (!validar.condicion) {
-					denegado.setText("Cadena no aceptada");
-					letraDenegada.setText("Letras " + validar.denegada + " fuera del conjunto finito de entradas.");
-				} else {
-					denegado.setText("Cadena no aceptada");
-					letraDenegada.setText("");
-				}
-			}
-		});
-		registrarEntrada2.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String cadena = text1.getText();
-				cadena = cadena.toUpperCase();
-				ValidarExpresion2 validar = new ValidarExpresion2();
-				array = validar.validarExpresion(text1.getText());
-				DefaultTableModel model = new DefaultTableModel(array, new String[array[0].length]);
-				table.setModel(model);
-				if (validar.estado == 'C') {
-					denegado.setText("Cadena aceptada");
-					letraDenegada.setText("");
-				} else if (!validar.condicion) {
-					denegado.setText("Cadena no aceptada");
-					letraDenegada.setText("Letras " + validar.denegada + " fuera del conjunto finito de entradas.");
-				} else {
-					denegado.setText("Cadena no aceptada");
-					letraDenegada.setText("");
-				}
-			}
-		});
-
-		registrarEntrada3.addActionListener(new ActionListener() {
+		registrarEntrada.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				/*	Recorrido del automata*/
 				String cadena = text1.getText();
 //				cadena = cadena.toUpperCase();
-				ValidarExpresion3 validar = new ValidarExpresion3();
+				ValidarExpresion4 validar = new ValidarExpresion4();
+				
+//				ValidarExpresion1 validar = new ValidarExpresion1();
+//				ValidarExpresion2 validar = new ValidarExpresion2();
+//				ValidarExpresion3 validar = new ValidarExpresion3();
+////				ValidarExpresion5 validar = new ValidarExpresion5();
+////				ValidarExpresion6 validar = new ValidarExpresion6();
+////				ValidarExpresion7 validar = new ValidarExpresion7();
+////				ValidarExpresion8 validar = new ValidarExpresion8();
+////				ValidarExpresion9 validar = new ValidarExpresion9();
+////				ValidarExpresion10 validar = new ValidarExpresion10();
+////				ValidarExpresion11 validar = new ValidarExpresion11();
+////				ValidarExpresion12 validar = new ValidarExpresion12();
+////				ValidarExpresion13 validar = new ValidarExpresion13();
+////				ValidarExpresion14 validar = new ValidarExpresion14();
+////				ValidarExpresion15 validar = new ValidarExpresion15();
+				
 				array = validar.validarExpresion(text1.getText());
 				DefaultTableModel model = new DefaultTableModel(array, new String[array[0].length]);
 				table.setModel(model);
-//				if (validar.estado == 'C') {
-//					denegado.setText("Cadena aceptada");
-//					letraDenegada.setText("");
-//				} else if (!validar.condicion) {
-//					denegado.setText("Cadena no aceptada");
+				if (validar.estado == 'C') {
+					denegado.setText("Automata aceptado");
+					letraDenegada.setText("");
+				} else if (!validar.condicion) {
+					denegado.setText("Automata no aceptado");
 //					letraDenegada.setText("Letras " + validar.denegada + " fuera del conjunto finito de entradas.");
-//				} else {
-//					denegado.setText("Cadena no aceptada");
-//					letraDenegada.setText("");
-//				}
+				} else {
+					denegado.setText("Automata no aceptada");
+					letraDenegada.setText("");
+				}
 				/*	Analizador Lexico*/
 				Evaluar evaluar = new Evaluar();
+				Sintactico sintaxis = new Sintactico();
+				String sintactico = sintaxis.sintactico(cadena);
 				try {
+					
+					sintacticoR.setText(sintactico);
+					
 					boolean ev = evaluar.lexico(cadena);
 					if(ev) {
 						System.out.println(ev);
