@@ -11,21 +11,20 @@ espacio=[ ,\t,\r,\n]+
 %}
 %%
 {espacio} {/*Ignore*/}
-"//".* {/*Ignore*/}
-"Hola" {return Saludo;}
-"adios" {return Despedida;}
-"cuidate" {return Cuidado;}
-"hasta luego" {DespedidaLuego;}
-"¿como estas?" {return Pregunta;}
-"123-456-7890" {return Telefono;}
-"12345" {return CP;}
-"usuario@example.com" {return Email;}
-"https://www.ejemplo.com" {return URL;}
-"192.168.0.1" {return IP;}
-"a+b" {return Suma;}
-"a-b" {return Resta;}
-"a*b" {return Multiplicacion;}
-"a/b" {return Division;}
+"Hola" {lexeme=yytext(); return Saludo;}
+"adios" {lexeme=yytext(); return Despedida;}
+"cuidate" {lexeme=yytext(); return Cuidado;}
+"hasta luego" {lexeme=yytext(); return DespedidaLuego;}
+"¿como estas?" {lexeme=yytext(); return Pregunta;}
+"123-456-7890" {lexeme=yytext(); return Telefono;}
+"12345" {lexeme=yytext(); return CP;}
+"usuario@example.com" {lexeme=yytext(); return Email;}
+"https://www.ejemplo.com" {lexeme=yytext(); return URL;}
+"192.168.0.1" {lexeme=yytext(); return IP;}
+"a+b" {lexeme=yytext(); return Suma;}
+"a-b" {lexeme=yytext(); return Resta;}
+"a*b" {lexeme=yytext(); return Multiplicacion;}
+"a/b" {lexeme=yytext(); return Division;}
 {L}({L}|{D})* {lexeme=yytext(); return Identificador;}
 ("(-"{D}+")")|{D}+ {lexeme=yytext(); return Numero;}
 . {return ERROR;}
