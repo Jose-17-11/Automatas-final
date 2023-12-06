@@ -21,10 +21,8 @@ import javax.swing.table.DefaultTableModel;
 
 import lexico.Evaluar;
 import testeos.Sintactico;
-import validaciones.ValidarExpresion1;
-import validaciones.ValidarExpresion2;
-import validaciones.ValidarExpresion3;
-import validaciones.ValidarExpresion4;
+import validaciones.ValidarExpresion5;
+import validaciones.ValidarExpresion6;
 
 //Clase funcional con la base de datos, solo falta renombrar variables
 public class VentanaPrincipal extends JFrame {
@@ -36,6 +34,8 @@ public class VentanaPrincipal extends JFrame {
 	JTextField text1, text2;
 	JButton registrarEntrada;
 	String[][] array = new String[7][7];
+	String[][] array2 = new String[7][7];
+	boolean end;
 
 	public VentanaPrincipal() {
 		setTitle("Automatas");
@@ -124,30 +124,31 @@ public class VentanaPrincipal extends JFrame {
 				/*	Recorrido del automata*/
 				String cadena = text1.getText();
 //				cadena = cadena.toUpperCase();
-				ValidarExpresion4 validar = new ValidarExpresion4();
+				ValidarExpresion5 validar = new ValidarExpresion5();
+				ValidarExpresion6 validar2 = new ValidarExpresion6();
+//				ValidarExpresion7 validar = new ValidarExpresion7();
+//				ValidarExpresion8 validar = new ValidarExpresion8();
+//				ValidarExpresion9 validar = new ValidarExpresion9();
+//				ValidarExpresion10 validar = new ValidarExpresion10();
+//				ValidarExpresion11 validar = new ValidarExpresion11();
+//				ValidarExpresion12 validar = new ValidarExpresion12();
+//				ValidarExpresion13 validar = new ValidarExpresion13();
+//				ValidarExpresion14 validar = new ValidarExpresion14();
+//				ValidarExpresion15 validar = new ValidarExpresion15();
 				
-//				ValidarExpresion1 validar = new ValidarExpresion1();
-//				ValidarExpresion2 validar = new ValidarExpresion2();
-//				ValidarExpresion3 validar = new ValidarExpresion3();
-////				ValidarExpresion5 validar = new ValidarExpresion5();
-////				ValidarExpresion6 validar = new ValidarExpresion6();
-////				ValidarExpresion7 validar = new ValidarExpresion7();
-////				ValidarExpresion8 validar = new ValidarExpresion8();
-////				ValidarExpresion9 validar = new ValidarExpresion9();
-////				ValidarExpresion10 validar = new ValidarExpresion10();
-////				ValidarExpresion11 validar = new ValidarExpresion11();
-////				ValidarExpresion12 validar = new ValidarExpresion12();
-////				ValidarExpresion13 validar = new ValidarExpresion13();
-////				ValidarExpresion14 validar = new ValidarExpresion14();
-////				ValidarExpresion15 validar = new ValidarExpresion15();
-				
-				array = validar.validarExpresion(text1.getText());
+				array2 = validar.validarExpresion(text1.getText());
+				array2 = validar2.validarExpresion(text1.getText());
 				DefaultTableModel model = new DefaultTableModel(array, new String[array[0].length]);
 				table.setModel(model);
 				if (validar.estado == 'C') {
+					array2 = validar.validarExpresion(text1.getText());
 					denegado.setText("Automata aceptado");
-					letraDenegada.setText("");
-				} else if (!validar.condicion) {
+					array = array2;
+				} else if (validar2.estado == 'D'){
+					array2 = validar2.validarExpresion(text1.getText());
+					denegado.setText("Automata aceptado");
+					array = array2;
+				}else if (!validar.condicion) {
 					denegado.setText("Automata no aceptado");
 //					letraDenegada.setText("Letras " + validar.denegada + " fuera del conjunto finito de entradas.");
 				} else {

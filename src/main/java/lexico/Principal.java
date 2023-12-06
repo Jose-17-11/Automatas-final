@@ -1,15 +1,15 @@
 package lexico;
 
-import java.io.File;
+import jflex.exceptions.SilentExit;
 
 public class Principal {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SilentExit {
 		String ruta = "/home/jose-manuel/eclipse-workspace/Automatas-final/src/main/java/implementacionesTests/Lexer.flex";
 		generarLexer(ruta);
 	}
-	
-	public static void generarLexer(String ruta) {
-		File archivo = new File(ruta);
-		jflex.Main.generate(archivo);
+
+	public static void generarLexer(String ruta) throws SilentExit {
+		String[] opciones = { ruta };
+		jflex.Main.generate(opciones);
 	}
 }
