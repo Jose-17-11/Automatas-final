@@ -1,4 +1,4 @@
-package lexer;
+package lexico;
 import static lexico.*;
 %%
 %class Lexer
@@ -17,7 +17,7 @@ espacio=[ ,\t,\r,\n]+
 "hasta luego" {lexeme=yytext(); return DespedidaLuego;}
 "¿como estas?" {lexeme=yytext(); return Pregunta;}
 "123-456-7890" {lexeme=yytext(); return Telefono;}
-"12345" {lexeme=yytext(); return Numero;}
+"12345" {lexeme=yytext(); return CP;}
 "usuario@example.com" {lexeme=yytext(); return Email;}
 "https://www.ejemplo.com" {lexeme=yytext(); return URL;}
 "192.168.0.1" {lexeme=yytext(); return IP;}

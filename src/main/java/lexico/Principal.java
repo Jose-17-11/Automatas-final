@@ -4,7 +4,7 @@ import jflex.exceptions.SilentExit;
 
 public class Principal {
 	public static void main(String[] args) throws SilentExit {
-		String ruta = "/home/jose-manuel/eclipse-workspace/Automatas-final/src/main/java/implementacionesTests/Lexer.flex";
+		String ruta = "/home/jose-manuel/eclipse-workspace/Automatas-final/src/main/java/lexico/Lexer.flex";
 		generarLexer(ruta);
 	}
 
