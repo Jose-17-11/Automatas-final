@@ -50,12 +50,12 @@ public class Testeos {
 		System.out.println(er.expresion("^a*b$", "a*b"));
 		System.out.println(er.expresion("^a/b$", "a/b"));
 		System.out.println(er.expresion("^a+b-c$", "a+b-c"));
-		
-		System.out.println(er.expresion("^\\d{3}-\\d{3}-\\d{4}$", "123-456-7890"));
-		System.out.println(er.expresion("^\\d{5}(?:-\\d{4})?$", "12345"));
-		System.out.println(er.expresion("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", "usuario@example.com"));
-		System.out.println(er.expresion("^(https?|ftp):\\/\\/[^\\s/$.?#].[^\\s]*$", "https://www.ejemplo.com"));
-		System.out.println(er.expresion("^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$", "192.168.0.1"));
+//		
+//		System.out.println(er.expresion("^\\d{3}-\\d{3}-\\d{4}$", "123-456-7890"));
+//		System.out.println(er.expresion("^\\d{5}(?:-\\d{4})?$", "12345"));
+//		System.out.println(er.expresion("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", "usuario@example.com"));
+//		System.out.println(er.expresion("^(https?|ftp):\\/\\/[^\\s/$.?#].[^\\s]*$", "https://www.ejemplo.com"));
+//		System.out.println(er.expresion("^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$", "192.168.0.1"));
 		
 		System.out.println("\n");
 		
