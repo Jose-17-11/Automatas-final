@@ -7,6 +7,6 @@ public class Main {
 		VentanaPrincipal sm = new VentanaPrincipal();
 		sm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		sm.setVisible(true);
-		sm.setBounds(50, 50, 1150, 600);
+		sm.setBounds(50, 50, 1150, 700);
 	}
-}
+}	

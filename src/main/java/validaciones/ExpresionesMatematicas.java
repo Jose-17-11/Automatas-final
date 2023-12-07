@@ -1,17 +1,17 @@
 package validaciones;
 
 
-public class ValidarExpresion5 {
+public class ExpresionesMatematicas {
     public char estado = 'A';
     public String denegada = "";
     public boolean condicion = true;
 //    a+b
     public String[][] validarExpresion(String entrada) {
         char[] letras = entrada.toCharArray();
-        String[][] array = new String[5][4];
+        String[][] array = new String[4][4];
 
         // Agregar valores vacíos al array
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 array[i][j] = "";
             }
@@ -25,7 +25,6 @@ public class ValidarExpresion5 {
         array[1][0] = "A";
         array[2][0] = "B";
         array[3][0] = "C";
-        array[4][0] = "D";
 
         estado = 'A';
         for (int i = 0; i < letras.length; i++) {
@@ -45,7 +44,7 @@ public class ValidarExpresion5 {
                 case 'B':
                     switch (letras[i]) {
                         case '+':
-                            array[0][2] = "-";
+                            array[0][2] = "+";
                             estado = 'C';
                             array[2][2] += " " + letras[i];
                             break;

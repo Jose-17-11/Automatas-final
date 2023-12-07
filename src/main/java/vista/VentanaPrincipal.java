@@ -21,8 +21,7 @@ import javax.swing.table.DefaultTableModel;
 
 import lexico.Evaluar;
 import testeos.Sintactico;
-import validaciones.ValidarExpresion5;
-import validaciones.ValidarExpresion6;
+import validaciones.*;
 
 //Clase funcional con la base de datos, solo falta renombrar variables
 public class VentanaPrincipal extends JFrame {
@@ -33,8 +32,8 @@ public class VentanaPrincipal extends JFrame {
 	JLabel titulo, n1, n2, denegado, letraDenegada, lexicoR, sintacticoR;
 	JTextField text1, text2;
 	JButton registrarEntrada;
-	String[][] array = new String[7][7];
-	String[][] array2 = new String[7][7];
+	String[][] array = new String[12][12];
+	String[][] array2 = new String[12][12];
 	boolean end;
 
 	public VentanaPrincipal() {
@@ -46,8 +45,8 @@ public class VentanaPrincipal extends JFrame {
 		imagenLabel.setIcon(imagenIcon);
 		imagenLabel.setBounds(750, 50, 344, 147);
 		
-		for (int i = 0; i < 7; i++) {
-			for (int j = 0; j < 6; j++) {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 7; j++) {
 				array[i][j] = "";
 			}
 		}
@@ -91,7 +90,7 @@ public class VentanaPrincipal extends JFrame {
 		 ************************/
 		DefaultTableModel model = new DefaultTableModel(array, new String[array[0].length]);
 		JTable table = new JTable(model);
-		table.setBounds(50, 400, 700, 110);
+		table.setBounds(50, 400, 700, 250);
 		JScrollPane scrollPane = new JScrollPane(table);
 
 		/********************************
@@ -124,11 +123,11 @@ public class VentanaPrincipal extends JFrame {
 				/*	Recorrido del automata*/
 				String cadena = text1.getText();
 //				cadena = cadena.toUpperCase();
-				ValidarExpresion5 validar = new ValidarExpresion5();
-				ValidarExpresion6 validar2 = new ValidarExpresion6();
-//				ValidarExpresion7 validar = new ValidarExpresion7();
-//				ValidarExpresion8 validar = new ValidarExpresion8();
-//				ValidarExpresion9 validar = new ValidarExpresion9();
+				ExpresionesMatematicas validar = new ExpresionesMatematicas();
+				CodigoPostal validar2 = new CodigoPostal();
+				Hola validar3 = new Hola();
+				Adios validar4 = new Adios();
+				IP validar5 = new IP();
 //				ValidarExpresion10 validar = new ValidarExpresion10();
 //				ValidarExpresion11 validar = new ValidarExpresion11();
 //				ValidarExpresion12 validar = new ValidarExpresion12();
@@ -138,14 +137,29 @@ public class VentanaPrincipal extends JFrame {
 				
 				array2 = validar.validarExpresion(text1.getText());
 				array2 = validar2.validarExpresion(text1.getText());
+				array2 = validar3.validarExpresion(text1.getText());
+				array2 = validar4.validarExpresion(text1.getText());
+				array2 = validar5.validarExpresion(text1.getText());
 				DefaultTableModel model = new DefaultTableModel(array, new String[array[0].length]);
 				table.setModel(model);
 				if (validar.estado == 'C') {
 					array2 = validar.validarExpresion(text1.getText());
 					denegado.setText("Automata aceptado");
 					array = array2;
-				} else if (validar2.estado == 'D'){
+				} else if (validar2.estado == 'E'){
 					array2 = validar2.validarExpresion(text1.getText());
+					denegado.setText("Automata aceptado");
+					array = array2;
+				} else if (validar3.estado == 'D'){
+					array2 = validar3.validarExpresion(text1.getText());
+					denegado.setText("Automata aceptado");
+					array = array2;
+				} else if (validar4.estado == 'F'){
+					array2 = validar4.validarExpresion(text1.getText());
+					denegado.setText("Automata aceptado");
+					array = array2;
+				} else if (validar5.estado == 'K'){
+					array2 = validar5.validarExpresion(text1.getText());
 					denegado.setText("Automata aceptado");
 					array = array2;
 				}else if (!validar.condicion) {
